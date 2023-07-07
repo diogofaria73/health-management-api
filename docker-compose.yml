@@ -1,0 +1,40 @@
+version: "3.7"
+
+services:
+  database:
+    image: postgres
+    container_name: health-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=health
+      - POSTGRES_PASSWORD=health
+      - POSTGRES_DB=health
+    volumes:
+      - pgdata:/data/postgres
+  # shadown-db:
+  #   image: postgres
+  #   container_name: gym-api-shadow
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     - POSTGRES_USER=gym
+  #     - POSTGRES_PASSWORD=gym
+  #     - POSTGRES_DB=gym
+  #   volumes:
+  #     - pgdata:/data/postgres
+  # api:
+  #   build: .
+  #   container_name: scm_api
+  #   ports:
+  #     - "3020:3020"
+  #     - "9229:9229"
+  #   volumes:
+  #     - .:/usr/app
+  #   links:
+  #     - database
+  #   depends_on:
+  #     - database
+volumes:
+  pgdata:
+    driver: local
