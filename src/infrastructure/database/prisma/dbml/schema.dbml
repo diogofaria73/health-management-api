@@ -2,6 +2,23 @@
 //// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 //// ------------------------------------------------------
 
+Table patients {
+  id String [pk]
+  name String [not null]
+  birthDate String [not null]
+  documentNumber String [unique, not null]
+  street String [not null]
+  number String [not null]
+  complement String [not null]
+  neighborhood String [not null]
+  postalCode String [not null]
+  city String [not null]
+  state String [not null]
+  isActive Boolean [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
 Table categories {
   id String [pk]
   name String [not null]
