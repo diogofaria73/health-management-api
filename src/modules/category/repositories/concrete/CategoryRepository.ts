@@ -11,37 +11,39 @@ export class CategoryRepository implements IGenericRepository<Category> {
   constructor(private readonly prisma: PrismaService) { }
 
   async create(data: CreateCategoryDto): Promise<Category> {
-    const result = await this.prisma.category.create({ data })
-    return result
+    const category = await this.prisma.category.create({ data })
+    return category
   }
 
   async update(data: UpdateCategoryDto): Promise<Category> {
-    const result = await this.prisma.category.update({
+    const category = await this.prisma.category.update({
       where: {
         id: data.id,
       },
       data,
     })
 
-    return result
+    return category
   }
 
   async delete(id: string): Promise<Category> {
-    const result = await this.prisma.category.delete({
+    const category = await this.prisma.category.delete({
       where: {
         id,
       },
     })
-    return result
+    return category
   }
 
   async findOne(id: string): Promise<Category> {
-    const result = await this.prisma.category.findFirst()
-    return result
+    const category = await this.prisma.category.findFirst({
+      where: { id },
+    })
+    return category
   }
 
   async findAll(): Promise<Category[]> {
-    const result = await this.prisma.category.findMany()
-    return result
+    const categories = await this.prisma.category.findMany()
+    return categories
   }
 }
