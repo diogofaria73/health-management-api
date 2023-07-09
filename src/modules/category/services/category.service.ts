@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common'
-import { EncryptPassword } from '../helpers/security/encripty.password'
-import { CategoryRepository } from '../repositories/concrete/UserRepository'
-import { CreateCategoryDto } from '../dtos/create-category-dto'
 import { Category } from '@prisma/client'
+import { CreateCategoryDto } from '../dtos/create-category-dto'
 import { UpdateCategoryDto } from '../dtos/update-category-dto'
+import { CategoryRepository } from '../repositories/concrete/CategoryRepository'
 
 @Injectable()
 export class CategoryService {
@@ -11,28 +10,27 @@ export class CategoryService {
   constructor(private readonly categoryRepository: CategoryRepository) { }
 
   async create(data: CreateCategoryDto): Promise<Category> {
-    const user = await this.categoryRepository.create(data)
-    return user
+    const category = await this.categoryRepository.create(data)
+    return category
   }
 
   async update(data: UpdateCategoryDto): Promise<Category> {
-    const user = await this.categoryRepository.update(data)
-    return user
+    const category = await this.categoryRepository.update(data)
+    return category
   }
 
   async delete(id: string): Promise<Category> {
-    const user = await this.categoryRepository.delete(id)
-    return user
+    const category = await this.categoryRepository.delete(id)
+    return category
   }
 
   async findOne(id: string): Promise<Category> {
-    const user = await this.categoryRepository.findOne(id)
-    return user
+    const category = await this.categoryRepository.findOne(id)
+    return category
   }
 
   async findAll(): Promise<Category[]> {
-    const result = await this.categoryRepository.findAll()
-    return result
+    const categories = await this.categoryRepository.findAll()
+    return categories
   }
-
 }

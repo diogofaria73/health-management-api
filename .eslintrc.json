@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "@rocketseat/eslint-config/node"
+  ],
+  "rules": {
+    "no-useless-constructor": "off",
+    "array-callback-return": "warn",
+    "import/order": [
+      1,
+      {
+        "groups": [
+          "external",
+          "builtin",
+          "internal",
+          "sibling",
+          "parent",
+          "index"
+        ]
+      }
+    ]
+  }
+}

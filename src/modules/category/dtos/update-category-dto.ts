@@ -1,5 +1,5 @@
 import { ApiProperty, ApiTags } from '@nestjs/swagger'
-import { IsBoolean, IsEmail, IsNotEmpty, IsString } from 'class-validator'
+import { IsBoolean, IsNotEmpty, IsString } from 'class-validator'
 
 @ApiTags('Categories')
 export class UpdateCategoryDto {
