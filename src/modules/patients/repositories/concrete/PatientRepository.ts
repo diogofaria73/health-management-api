@@ -47,8 +47,6 @@ export class PatientRepository implements IPatientRepository<Patient> {
           },
         },
       },
-
-
     })
     return patient
   }
@@ -72,6 +70,7 @@ export class PatientRepository implements IPatientRepository<Patient> {
       where: {
         isActive: true,
       },
+
 
       include: {
         clinic: {

@@ -61,5 +61,4 @@ export class CreatePatientDto {
   @IsNotEmpty()
   @IsString()
   clinicId: string
-
 }

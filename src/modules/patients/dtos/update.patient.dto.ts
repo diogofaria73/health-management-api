@@ -66,5 +66,4 @@ export class UpdatePatientDto {
   @IsNotEmpty()
   @IsString()
   clinicId: string
-
 }
