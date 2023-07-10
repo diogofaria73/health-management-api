@@ -1,27 +1,12 @@
 import { ApiProperty, ApiTags } from '@nestjs/swagger'
 import { IsBoolean, IsNotEmpty, IsString } from 'class-validator'
 
-@ApiTags('Patients')
-export class UpdatePatientDto {
-  @ApiProperty({ example: 'cuuid' })
-  @IsNotEmpty()
-  @IsString()
-  id: string
-
-  @ApiProperty({ example: 'José Belini da Silva Cruz' })
+@ApiTags('Clinics')
+export class CreateClinicDto {
+  @ApiProperty({ example: 'Clinica José Oliveira Filho' })
   @IsNotEmpty()
   @IsString()
   name: string
-
-  @ApiProperty({ example: '1972-01-01' })
-  @IsNotEmpty()
-  @IsString()
-  birthDate: string
-
-  @ApiProperty({ example: '089.887.256-85' })
-  @IsNotEmpty()
-  @IsString()
-  documentNumber: string
 
   @ApiProperty({ example: 'Rua do Sossego' })
   @IsNotEmpty()
@@ -61,10 +46,4 @@ export class UpdatePatientDto {
   @IsNotEmpty()
   @IsBoolean()
   isActive: boolean
-
-  @ApiProperty({ example: 'ccuid' })
-  @IsNotEmpty()
-  @IsString()
-  clinicId: string
-
 }

@@ -40,12 +40,30 @@ export class PatientRepository implements IPatientRepository<Patient> {
       where: {
         id,
       },
+      include: {
+        clinic: {
+          select: {
+            name: true,
+          },
+        },
+      },
+
+
     })
     return patient
   }
 
   async findAll(): Promise<Patient[]> {
-    const patients = await this.prisma.patient.findMany()
+
+    const patients = await this.prisma.patient.findMany({
+      include: {
+        clinic: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    })
     return patients
   }
 
@@ -53,6 +71,14 @@ export class PatientRepository implements IPatientRepository<Patient> {
     const patients = await this.prisma.patient.findFirst({
       where: {
         isActive: true,
+      },
+
+      include: {
+        clinic: {
+          select: {
+            name: true,
+          },
+        },
       },
     })
     return patients
