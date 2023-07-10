@@ -62,9 +62,9 @@ export class UpdatePatientDto {
   @IsBoolean()
   isActive: boolean
 
-
   @ApiProperty({ example: 'ccuid' })
   @IsNotEmpty()
   @IsString()
   clinicId: string
+
 }
