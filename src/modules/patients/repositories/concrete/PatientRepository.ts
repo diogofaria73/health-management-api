@@ -47,11 +47,13 @@ export class PatientRepository implements IPatientRepository<Patient> {
           },
         },
       },
+
     })
     return patient
   }
 
   async findAll(): Promise<Patient[]> {
+
     const patients = await this.prisma.patient.findMany({
       include: {
         clinic: {
