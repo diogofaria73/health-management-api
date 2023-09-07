@@ -3,14 +3,22 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { ValidationPipe } from '@nestjs/common'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import * as basicAuth from 'express-basic-auth'
+import { ConfigService } from '@nestjs/config'
+import { Env } from '@core/env'
+import { log } from 'console'
+import { config } from 'process'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
   // Default using Express
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: true,
+    logger: ['error', 'warn'],
+    autoFlushLogs: true,
   })
   app.enableCors()
+
+  const configService = app.get<ConfigService<Env, true>>(ConfigService)
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -19,29 +27,34 @@ async function bootstrap() {
   )
 
   app.use(
-    [process.env.SWAGGER_DOCS_URL],
+    [configService.get('SWAGGER_DOCS_URL')],
     basicAuth({
       challenge: false,
       users: {
-        [process.env.SWAGGER_USERNAME]: process.env.SWAGGER_PASSWORD,
+        [configService.get('SWAGGER_USER_NAME')]:
+          configService.get('SWAGGER_PASSWORD'),
       },
     }),
   )
 
   const config = new DocumentBuilder()
     .setContact(
-      process.env.SWAGGER_CONTACT_NAME,
-      process.env.SWAGGER_CONTACT_PAGE,
-      process.env.SWAGGER_CONTACT_EMAIL,
+      configService.get('SWAGGER_CONTACT_NAME'),
+      configService.get('SWAGGER_CONTACT_PAGE'),
+      configService.get('SWAGGER_CONTACT_EMAIL'),
     )
-    .setDescription('API documentation')
+    .setDescription(configService.get('SWAGGER_API_DESCRIPTION'))
+    .setTitle(configService.get('SWAGGER_API_TITLE'))
     .setVersion('v1.0')
     .build()
 
   const document = SwaggerModule.createDocument(app, config)
 
-  SwaggerModule.setup(process.env.SWAGGER_DOCS_URL, app, document)
+  SwaggerModule.setup(configService.get('SWAGGER_DOCS_URL'), app, document)
 
-  await app.listen(process.env.API_DEFAULT_PORT, process.env.API_EXTERNAL_PORT)
+  await app.listen(
+    configService.get('API_DEFAULT_PORT'),
+    configService.get('API_EXTERNAL_PORT'),
+  )
 }
 bootstrap()

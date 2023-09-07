@@ -10,85 +10,60 @@ export class PatientRepository implements IPatientRepository<Patient> {
   // eslint-disable-next-line prettier/prettier
   constructor(private readonly prisma: PrismaService) { }
 
-  async create(data: CreatePatientDto): Promise<Patient> {
+  async create(data: CreatePatientDto): Promise<Patient | null> {
     const patient = await this.prisma.patient.create({ data })
-    return patient
+    return patient || null
   }
 
-  async update(data: UpdatePatientDto): Promise<Patient> {
+  async update(data: UpdatePatientDto): Promise<Patient | null> {
     const patient = await this.prisma.patient.update({
       where: {
         id: data.id,
       },
       data,
     })
-    return patient
+    return patient || null
   }
 
-  async delete(id: string): Promise<Patient> {
+  async delete(id: string): Promise<Patient | null> {
     const patient = await this.prisma.patient.delete({
       where: {
         id,
       },
     })
 
-    return patient
+    return patient || null
   }
 
-  async findOne(id: string): Promise<Patient> {
+  async findOne(id: string): Promise<Patient | null> {
     const patient = await this.prisma.patient.findFirst({
       where: {
         id,
       },
-      include: {
-        clinic: {
-          select: {
-            name: true,
-          },
-        },
-      },
     })
-    return patient
+    return patient || null
   }
 
-  async findAll(): Promise<Patient[]> {
-
-    const patients = await this.prisma.patient.findMany({
-      include: {
-        clinic: {
-          select: {
-            name: true,
-          },
-        },
-      },
-    })
-    return patients
+  async findAll(): Promise<Patient[] | null> {
+    const patients = await this.prisma.patient.findMany({})
+    return patients || null
   }
 
-  async findEnabledPatients(): Promise<Patient> {
+  async findEnabledPatients(): Promise<Patient | null> {
     const patients = await this.prisma.patient.findFirst({
       where: {
         isActive: true,
       },
-
-
-      include: {
-        clinic: {
-          select: {
-            name: true,
-          },
-        },
-      },
     })
-    return patients
+    return patients || null
   }
 
-  async findDisabledPatients(): Promise<Patient> {
+  async findDisabledPatients(): Promise<Patient | null> {
     const patients = await this.prisma.patient.findFirst({
       where: {
         isActive: false,
       },
     })
-    return patients
+    return patients || null
   }
 }

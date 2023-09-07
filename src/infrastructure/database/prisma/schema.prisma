@@ -14,25 +14,6 @@ generator dbml {
   provider = "prisma-dbml-generator"
 }
 
-model Clinic {
-  id           String    @id @default(cuid())
-  name         String
-  street       String
-  number       String
-  complement   String
-  neighborhood String
-  postalCode   String
-  city         String
-  state        String
-  isActive     Boolean
-  patient      Patient[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("clinics")
-}
-
 model Patient {
   id             String  @id @default(cuid())
   name           String
@@ -46,23 +27,9 @@ model Patient {
   city           String
   state          String
   isActive       Boolean
-  clinic         Clinic? @relation(fields: [clinicId], references: [id])
-  clinicId       String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("patients")
-}
-
-model Category {
-  id          String  @id @default(cuid())
-  name        String
-  description String
-  isActive    Boolean @default(true)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("categories")
 }

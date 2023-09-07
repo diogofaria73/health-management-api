@@ -1,4 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
+import {
+  Body,
+  ConflictException,
+  Controller,
+  Delete,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common'
 import { ApiBasicAuth, ApiTags } from '@nestjs/swagger'
 import { PatientService } from './patient.service'
 import { CreatePatientDto } from '../dtos/create.patient.dto'
@@ -14,7 +25,11 @@ export class PatientController {
   @Post('create')
   async create(@Body() data: CreatePatientDto) {
     const result = await this.patientService.create(data)
-    return result
+    if (result != null) {
+      return result
+    } else {
+      throw new ConflictException('Patient already exists')
+    }
   }
 
   @Get('all')
