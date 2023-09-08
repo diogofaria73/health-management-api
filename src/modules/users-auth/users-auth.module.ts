@@ -7,6 +7,7 @@ import { PrismaService } from '@infra/database/prisma.service'
 import { AuthenticateController } from './services/user-auth.controller'
 import { UserAuthService } from './services/user-auth.service'
 import { UserAuthRepository } from './repositories/concrete/UserAuthRepository'
+import { JwtStrategy } from './jwt-configs/jwt.strategy'
 
 @Module({
   imports: [
@@ -30,7 +31,7 @@ import { UserAuthRepository } from './repositories/concrete/UserAuthRepository'
     }),
   ],
   controllers: [AuthenticateController],
-  providers: [PrismaService, UserAuthService, UserAuthRepository],
+  providers: [PrismaService, UserAuthService, UserAuthRepository, JwtStrategy],
 })
 // eslint-disable-next-line prettier/prettier
 export class UsersAuthModule { }

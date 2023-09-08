@@ -7,14 +7,17 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
+import { AuthGuard } from '@nestjs/passport'
 import { UserService } from './user.service'
 import { CreateUserDto } from '../dtos/create.user.dto'
 import { UpdateUserDto } from '../dtos/update.user.dto'
 
 @ApiTags('Users')
 @Controller(`${'/api/'}${process.env.API_VERSION}${'/users'}`)
+@UseGuards(AuthGuard('jwt'))
 export class UserController {
   // eslint-disable-next-line prettier/prettier
   constructor(private readonly userService: UserService) { }
