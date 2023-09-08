@@ -8,4 +8,5 @@ import { PatientRepository } from './repositories/concrete/PatientRepository'
   controllers: [PatientController],
   providers: [PrismaService, PatientService, PatientRepository],
 })
-export class PatientModule {}
+// eslint-disable-next-line prettier/prettier
+export class PatientModule { }

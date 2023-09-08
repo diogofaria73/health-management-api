@@ -5,8 +5,6 @@ import { NestExpressApplication } from '@nestjs/platform-express'
 import * as basicAuth from 'express-basic-auth'
 import { ConfigService } from '@nestjs/config'
 import { Env } from '@core/env'
-import { log } from 'console'
-import { config } from 'process'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
