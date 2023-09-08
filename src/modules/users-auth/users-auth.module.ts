@@ -3,7 +3,10 @@ import { Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
+import { PrismaService } from '@infra/database/prisma.service'
 import { AuthenticateController } from './services/user-auth.controller'
+import { UserAuthService } from './services/user-auth.service'
+import { UserAuthRepository } from './repositories/concrete/UserAuthRepository'
 
 @Module({
   imports: [
@@ -27,7 +30,7 @@ import { AuthenticateController } from './services/user-auth.controller'
     }),
   ],
   controllers: [AuthenticateController],
-  providers: [],
+  providers: [PrismaService, UserAuthService, UserAuthRepository],
 })
 // eslint-disable-next-line prettier/prettier
 export class UsersAuthModule { }

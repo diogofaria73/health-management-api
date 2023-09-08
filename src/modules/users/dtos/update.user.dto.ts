@@ -4,6 +4,7 @@ import {
   IsEmail,
   IsNotEmpty,
   IsString,
+  IsStrongPassword,
   Length,
 } from 'class-validator'
 
@@ -24,10 +25,9 @@ export class UpdateUserDto {
   @IsEmail()
   email: string
 
-  @ApiProperty({ example: 'fadababca@123' })
+  @ApiProperty({ example: 'Fadababca@123' })
   @IsNotEmpty()
-  @IsString()
-  @Length(8, 16)
+  @IsStrongPassword()
   password: string
 
   @ApiProperty({ example: true })
