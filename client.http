@@ -1,0 +1,26 @@
+@baseUrl = http://localhost:3000
+@authToken = {{authenticate.response.body.access_token}}
+
+###
+# @name authenticate
+POST {{baseUrl}}/api/v1/authenticate/login
+Content-Type: application/json
+
+{
+    "email": "diogofaria073@gmail.com",
+    "password":"Diogo@2023"
+}
+
+###
+# @name create user
+POST {{baseUrl}}/api/v1/users/create
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "name": "Taysa Garcia",
+  "email": "taysafati@gmail.com",
+  "password": "Taysa@2023",
+  "isActive": true,
+  "isAdmin": true
+}
