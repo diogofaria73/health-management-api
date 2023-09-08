@@ -23,14 +23,18 @@
     "db:diagram:view": "dbdocs build 'src/infrastructure/database/prisma/dbml/schema.dbml'",
     "db:migrate": "npx prisma migrate dev",
     "db:migrate:reset": "npx prisma migrate reset",
-    "db:migrate:status": "npx prisma migrate status"
+    "db:migrate:status": "npx prisma migrate status",
+    "generate:private:key": "openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048",
+    "generate:public:key": "openssl rsa -pubout -in private_key.pem -out public_key.pem",
+    "private:key:base64": "base64 -i private_key.pem -o private_key_base64.txt",
+    "public:key:base64": "base64 -i public_key.pem -o public_key_base64.txt"
   },
   "dependencies": {
     "@fastify/static": "^6.10.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^3.0.1",
     "@nestjs/core": "^9.0.0",
-    "@nestjs/jwt": "^10.0.3",
+    "@nestjs/jwt": "^10.1.1",
     "@nestjs/passport": "^9.0.3",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/platform-fastify": "^9.4.0",
@@ -42,6 +46,7 @@
     "class-validator": "^0.14.0",
     "date-fns": "^2.30.0",
     "express-basic-auth": "^1.2.1",
+    "js-base64": "^3.7.5",
     "linqts": "^1.15.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",

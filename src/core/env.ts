@@ -1,3 +1,4 @@
+import { Base64 } from 'js-base64'
 import { z } from 'zod'
 
 export const envSchema = z.object({
@@ -10,7 +11,8 @@ export const envSchema = z.object({
   DATABASE_URL: z.string(),
 
   // JWT security definitions
-  JWT_SECRET_KEY: z.string(),
+  JWT_PRIVATE_KEY: z.string(),
+  JWT_PUBLIC_KEY: z.string(),
   JWT_SECRET_KEY_EXPIRATION: z.string(),
 
   // Encrypt salt complexity
