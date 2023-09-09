@@ -18,9 +18,18 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-  "name": "Taysa Garcia",
-  "email": "taysafati@gmail.com",
+  "name": "Tays1 Garcia3",
+  "email": "tay2safat3@gmail.com",
   "password": "Taysa@2023",
   "isActive": true,
   "isAdmin": true
+}
+
+###
+# @name get userS
+GET({{baseUrl}}/api/v1/users/all
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+{
+
 }

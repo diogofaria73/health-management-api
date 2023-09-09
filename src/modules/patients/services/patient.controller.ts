@@ -7,14 +7,16 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common'
-import { ApiBasicAuth, ApiTags } from '@nestjs/swagger'
+import { ApiTags } from '@nestjs/swagger'
+import { AuthGuard } from '@nestjs/passport'
 import { PatientService } from './patient.service'
 import { CreatePatientDto } from '../dtos/create.patient.dto'
 import { UpdatePatientDto } from '../dtos/update.patient.dto'
 
-@ApiBasicAuth()
 @ApiTags('Patients')
+@UseGuards(AuthGuard('jwt'))
 @Controller(`${'/api/'}${process.env.API_VERSION}${'/patient'}`)
 export class PatientController {
   // eslint-disable-next-line prettier/prettier

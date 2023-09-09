@@ -6,7 +6,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt'
 import { z } from 'zod'
 
 const tokenSchema = z.object({
-  sub: z.string().uuid(),
+  sub: z.string(),
 })
 
 type TokenSchema = z.infer<typeof tokenSchema>
@@ -18,7 +18,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: Buffer.from(publicKey, 'base64'),
-      algorithms: ['RS256'],
+      algorithm: 'RS256',
     })
   }
 

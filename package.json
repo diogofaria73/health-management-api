@@ -11,7 +11,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
+    "start:debug": "rm -rf dist && nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
@@ -26,8 +26,8 @@
     "db:migrate:status": "npx prisma migrate status",
     "generate:private:key": "openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048",
     "generate:public:key": "openssl rsa -pubout -in private_key.pem -out public_key.pem",
-    "private:key:base64": "base64 -i private_key.pem -o private_key_base64.txt",
-    "public:key:base64": "base64 -i public_key.pem -o public_key_base64.txt"
+    "private:key:to_base64": "base64 -i private_key.pem -o private_key_base64.txt",
+    "public:key:to_base64": "base64 -i public_key.pem -o public_key_base64.txt"
   },
   "dependencies": {
     "@fastify/static": "^6.10.1",

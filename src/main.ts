@@ -41,6 +41,8 @@ async function bootstrap() {
       configService.get('SWAGGER_CONTACT_PAGE'),
       configService.get('SWAGGER_CONTACT_EMAIL'),
     )
+    .addBearerAuth()
+    .addSecurityRequirements('bearer')
     .setDescription(configService.get('SWAGGER_API_DESCRIPTION'))
     .setTitle(configService.get('SWAGGER_API_TITLE'))
     .setVersion('v1.0')

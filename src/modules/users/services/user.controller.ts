@@ -16,8 +16,8 @@ import { CreateUserDto } from '../dtos/create.user.dto'
 import { UpdateUserDto } from '../dtos/update.user.dto'
 
 @ApiTags('Users')
-@Controller(`${'/api/'}${process.env.API_VERSION}${'/users'}`)
 @UseGuards(AuthGuard('jwt'))
+@Controller(`${'/api/'}${process.env.API_VERSION}${'/users'}`)
 export class UserController {
   // eslint-disable-next-line prettier/prettier
   constructor(private readonly userService: UserService) { }
